@@ -2,6 +2,8 @@
 
 require __DIR__ . '/../application/bootstrap.php';
 
+php_error\reportErrors();
+
 // Routing
 $app['request']->attributes->set('controller', 'index');
 
