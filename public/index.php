@@ -17,10 +17,6 @@ try {
     if ($result === false) {
         throw new DomainException();
     }  
-    if (strstr($result['target'], '://') !== false) {
-        header('Location: ' . $result['target']);
-        exit();
-    }  
     $request->query->replace($result['params']);
     $request->attributes->set('target', $result['target']);
 
