@@ -4,11 +4,6 @@
 
 require __DIR__ . '/../application/bootstrap.php';
 
-// Pretty error reporting
-php_error\reportErrors(array(
-    'application_root' => __DIR__
-));
-
 // Get HTTP objects
 $request  = $app['request'];
 $response = $app['response'];

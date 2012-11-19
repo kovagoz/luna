@@ -2,20 +2,6 @@
     "repositories": [{
         "type": "package",
         "package": {
-            "name": "joseph-lenton/php-error",
-            "version": "1.0.0",
-            "autoload": {
-                "classmap": ["src/php_error.php"]
-            },
-            "source": {
-                "url": "https://github.com/JosephLenton/PHP-Error",
-                "type": "git",
-                "reference": "master"
-            }
-        }
-    },{
-        "type": "package",
-        "package": {
             "name": "danny-van-kooten/alto-router",
             "version": "1.0.0",
             "autoload": {
