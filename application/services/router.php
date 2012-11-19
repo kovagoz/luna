@@ -10,13 +10,13 @@
 use Symfony\Component\Yaml\Parser;
 
 $app['router'] = $app->share(function() {
-    $router = new AltoRouter();
-    $file   = file_get_contents(APP_PATH . '/configs/router.yml');
+    $file = file_get_contents(APP_PATH . '/configs/router.yml');
     if ($file === false) {
         throw new Exception('Route config not found.');
     }
     $yaml   = new Parser();
     $routes = $yaml->parse($file);
+    $router = new AltoRouter();
     foreach ($routes as $name => $route) {
         $method = implode('|', (array) $route['method']);
         $router->map($method, $route['map'], $route['target'], $name);
