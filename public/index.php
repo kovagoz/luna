@@ -1,5 +1,7 @@
 <?php
 
+// .:: FRONT CONTROLLER ::.
+
 require __DIR__ . '/../application/bootstrap.php';
 
 // Pretty error reporting
@@ -7,23 +9,42 @@ php_error\reportErrors(array(
     'application_root' => __DIR__
 ));
 
-// Routing
-$app['request']->attributes->set('controller', 'index');
-
-// Dispatch
+// Get HTTP objects
+$request  = $app['request'];
+$response = $app['response'];
+ 
 try {
-    $app['response']->setContent(
+    // URL routing
+    $result = $app['router']->match(
+        $request->getPathInfo(),
+        $request->getMethod()
+    );
+    if ($result === false) {
+        throw new DomainException();
+    }  
+    if (strstr($result['target'], '://') !== false) {
+        header('Location: ' . $result['target']);
+        exit();
+    }  
+    $request->query->replace($result['params']);
+    $request->query->set('target', $result['target']);
+
+    // Dispatch
+    $response->setContent(
         call_user_func(function() use ($app) {
             return include sprintf(
                 '%s/controllers/%s.php',
                 APP_PATH,
-                $app['request']->attributes->get('controller')
-            );
-        })
+                $app['request']->get('target')
+            );  
+        })  
     );
+} catch (DomainException $e) {
+    $response->setStatusCode(404);
+    $response->setContent('Page not found.');
 } catch (Exception $e) {
-    $app['response']->setStatusCode(500);
-    $app['response']->setContent('Internal server error.');
+    $response->setStatusCode(500);
+    $response->setContent('Internal server error.');
 }
 
 $app['response']->send();
