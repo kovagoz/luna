@@ -22,7 +22,7 @@ try {
         exit();
     }  
     $request->query->replace($result['params']);
-    $request->query->set('target', $result['target']);
+    $request->attributes->set('target', $result['target']);
 
     // Dispatch
     $response->setContent(
@@ -30,7 +30,7 @@ try {
             return include sprintf(
                 '%s/controllers/%s.php',
                 APP_PATH,
-                $app['request']->get('target')
+                $app['request']->attributes->get('target')
             );  
         })  
     );
