@@ -7,7 +7,7 @@ require __DIR__ . '/../application/bootstrap.php';
 // Get HTTP objects
 $request  = $app['request'];
 $response = $app['response'];
- 
+
 try {
     // URL routing
     $result = $app['router']->match(
@@ -33,9 +33,6 @@ try {
 } catch (DomainException $e) {
     $response->setStatusCode(404);
     $response->setContent('Page not found.');
-} catch (Exception $e) {
-    $response->setStatusCode(500);
-    $response->setContent('Internal server error.');
 }
 
 $app['response']->send();
