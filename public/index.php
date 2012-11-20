@@ -17,7 +17,7 @@ try {
     if ($result === false) {
         throw new DomainException();
     }  
-    $request->query->replace($result['params']);
+    $request->query->add($result['params']);
     $request->attributes->set('target', $result['target']);
 
     // Dispatch
