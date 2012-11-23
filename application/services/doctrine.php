@@ -3,7 +3,7 @@
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
-$app['db'] = $app->share(function($app) {
+$app['em'] = $app->share(function($app) {
     $dbParams = array(
         'driver' => 'pdo_sqlite',
         'path'   => APP_ROOT . '/data/db.sqlite3'

@@ -7,7 +7,7 @@ use Symfony\Component\Console\Helper\HelperSet;
 require __DIR__ . '/../bootstrap.php';
 
 $helperSet = new HelperSet(array(
-    'em' => new EntityManagerHelper($app['db'])
+    'em' => new EntityManagerHelper($app['em'])
 ));
 
 ConsoleRunner::run($helperSet);
