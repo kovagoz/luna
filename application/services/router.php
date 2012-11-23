@@ -10,7 +10,7 @@
 use Symfony\Component\Yaml\Parser;
 
 $app['router'] = $app->share(function() {
-    $file = file_get_contents(APP_PATH . '/configs/router.yml');
+    $file = file_get_contents(APP_ROOT . '/configs/router.yml');
     if ($file === false) {
         throw new Exception('Route config not found.');
     }

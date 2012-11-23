@@ -35,7 +35,7 @@ try {
             call_user_func(function() use ($app) {
                 return include sprintf(
                     '%s/controllers/%s.php',
-                    APP_PATH,
+                    APP_ROOT,
                     $app['request']->attributes->get('target')
                 );  
             })  
