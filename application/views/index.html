@@ -1,12 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Luna framework</title>
-</head>
-<body>
+{% extends 'layout.html' %}
 
-    <h1>Welcome {{ name|default('Anonymous') }}!</h1>
+{% block content %}
 
-</body>
-</html>
+<h1>Welcome {{ name|default('Anonymous') }}!</h1>
+
+{% endblock %}
