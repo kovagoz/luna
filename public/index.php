@@ -18,7 +18,7 @@ try {
         throw new DomainException();
     }
 
-    // Dispatch
+    // Process routing target
     if (strstr($result['target'], '://') !== false) {
         header('Location: ' . $result['target']);
         exit();
@@ -31,15 +31,26 @@ try {
         $request->query->add($result['params']);
         $request->attributes->set('target', $result['target']);
 
-        $response->setContent(
-            call_user_func(function() use ($app) {
-                return include sprintf(
-                    '%s/controllers/%s.php',
-                    APP_ROOT,
-                    $app['request']->attributes->get('target')
-                );  
-            })  
-        );
+        // Run controller
+        $content = call_user_func(function() use ($app) {
+            return include sprintf(
+                '%s/controllers/%s.php',
+                APP_ROOT,
+                $app['request']->attributes->get('target')
+            );  
+        });
+
+        // Set response by content type
+        switch (true) {
+            case is_array($content);
+                $response->headers->set('Content-Type', 'application/json');
+                $response->setContent(json_encode($content));
+                break;
+
+            default:
+                $response->setContent($content);
+                break;
+        }
     }
 } catch (DomainException $e) {
     $response->setStatusCode(404);
