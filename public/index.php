@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', 1);
+
 // .:: FRONT CONTROLLER ::.
 
 require __DIR__ . '/../application/bootstrap.php';
@@ -7,6 +9,9 @@ require __DIR__ . '/../application/bootstrap.php';
 // Get HTTP objects
 $request  = $app['request'];
 $response = $app['response'];
+$session  = $app['session'];
+
+$session->start();
 
 try {
     // URL routing
