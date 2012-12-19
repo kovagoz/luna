@@ -19,7 +19,7 @@
         "pimple/pimple": "1.0.x-dev",
         "symfony/http-foundation": "2.2.x-dev",
         "symfony/yaml": "2.2.x-dev",
-        "twig/twig": "dev-named-arguments",
+        "twig/twig": "1.12.*@dev",
         "danny-van-kooten/alto-router": "1.0.0"
     }
 }
